@@ -1,0 +1,32 @@
+package com.example.demo.entity
+
+import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
+import java.time.ZonedDateTime
+
+@Entity
+@Table(name = "authority")
+data class Order(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    var id: Int? = null,
+
+    @Column(name = "user_name", nullable = false)
+    var userName: String,
+
+    @Column(name = "product_name", nullable = false)
+    var productName: String,
+
+    @Column(name = "quantity", nullable = false)
+    var quantity: Int,
+
+    @Column(name = "created_at", nullable = true, insertable = false, updatable = false)
+    @CreationTimestamp
+    var createdAt: ZonedDateTime? = null,
+
+    @Column(name = "updated_at", nullable = true, insertable = true, updatable = true)
+    @UpdateTimestamp
+    var updatedAt: ZonedDateTime? = null,
+)
