@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://db:3306/experiment
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: my-mariadb-root-password
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
