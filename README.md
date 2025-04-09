@@ -1,28 +1,120 @@
 # kafka-scalability-sandbox
 kafka-scalability-sandbox
 
-# 최초 세팅
+# 준비
 - ```base
-  # 도커 컨테이너 띄우기
-  docker compose up -d
+  # 개발용 도커 컨테이너 띄우기
+  docker compose -f ./docker-compose-dev.yml up
   
-  ## DB 생성
-  # DB 도커 컨테이너 쉡 접속
-  docker exec -it db bash
+  # 그래들 빌드 진행
+  ./gradlew clean build
   
-  # DB 쉡 접속
-  mariadb -u root -p
+  # 개발용 도커 컨테이너 끄기
+  docker compose -f ./docker-compose-dev.yml down
   
-  # DB 생성
-  # 생성 후 Ctrl + D로 나가기
-  CREATE DATABASE experiment;
+  # k6 테스트 용 도커 컨테이너 띄우기
+  docker compose up
+  
+  ## - 카프카 토픽 생성
+  ## - k6 테스트 진행
+    ```
+  
+## 토픽 생성
+- ```bash
+    kafka-topics.sh --create \
+    --bootstrap-server kafka:9092 \
+    --topic order2 \
+    --partitions 1 \
+    --replication-factor 1 \
+    --config retention.ms=600000 \
+    --config segment.ms=600000 \
+    --config delete.retention.ms=120000 \
+    --config compression.type=zstd \
+    --config min.insync.replicas=1 \
+    --config max.message.bytes=262144 \
+    --config flush.messages=1 \
+    --config flush.ms=1000
 
-  # order upsert 예시 
-  curl -X POST --location 'http://localhost:8080/orders/1/upsert' --header 'Content-Type: application/json' --data '{"userName": "kim", "productName": "product", "quantity": 1}'
+    kafka-topics.sh --create \
+    --bootstrap-server kafka:9092 \
+    --topic order3 \
+    --partitions 3 \
+    --replication-factor 1 \
+    --config retention.ms=600000 \
+    --config segment.ms=600000 \
+    --config delete.retention.ms=120000 \
+    --config compression.type=zstd \
+    --config min.insync.replicas=1 \
+    --config max.message.bytes=262144 \
+    --config flush.messages=1 \
+    --config flush.ms=1000
+
+    kafka-topics.sh --create \
+    --bootstrap-server kafka:9092 \
+    --topic inventory2 \
+    --partitions 3 \
+    --replication-factor 1 \
+    --config retention.ms=600000 \
+    --config segment.ms=600000 \
+    --config delete.retention.ms=120000 \
+    --config compression.type=zstd \
+    --config min.insync.replicas=1 \
+    --config max.message.bytes=262144 \
+    --config flush.messages=1 \
+    --config flush.ms=1000
+
+    kafka-topics.sh --create \
+    --bootstrap-server kafka:9092 \
+    --topic inventory3 \
+    --partitions 3 \
+    --replication-factor 1 \
+    --config retention.ms=600000 \
+    --config segment.ms=600000 \
+    --config delete.retention.ms=120000 \
+    --config compression.type=zstd \
+    --config min.insync.replicas=1 \
+    --config max.message.bytes=262144 \
+    --config flush.messages=1 \
+    --config flush.ms=1000
+
+    kafka-topics.sh --create \
+    --bootstrap-server kafka:9092 \
+    --topic inventory4 \
+    --partitions 3 \
+    --replication-factor 1 \
+    --config retention.ms=600000 \
+    --config segment.ms=600000 \
+    --config delete.retention.ms=120000 \
+    --config compression.type=zstd \
+    --config min.insync.replicas=1 \
+    --config max.message.bytes=262144 \
+    --config flush.messages=1 \
+    --config flush.ms=1000
     ```
   
 ## k6 테스트
 - ```bash
-    cat ./k6/1-script-spring.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
-
+    cat ./k6/1-script-spring-update.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
+  
+    cat ./k6/2-script-kafka-partition-1-update.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
+  
+    cat ./k6/3-script-kafka-partition-3-update.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
+  
+    cat ./k6/4-script-spring-insert.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
+  
+    cat ./k6/5-script-kafka-partition-1-insert.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
+  
+    cat ./k6/6-script-kafka-partition-3-insert.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
+  
+    cat ./k6/7-script-kafka-partition-3-batch-insert.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
     ```
+
+## 결과 확인
+- ```bash
+    # 시나리오 1,2,3 결과 조회
+    curl "http://localhost:8080/orders"
+  
+    # 시나리오 4,5,6,7 결과 조회
+    curl "http://localhost:8080/inventories"
+    ```
+    

@@ -3,7 +3,6 @@ package com.example.demo.dto
 import com.example.demo.entity.Order1
 import com.example.demo.entity.Order2
 import com.example.demo.entity.Order3
-import com.example.demo.entity.Order4
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotEmpty
 
@@ -19,8 +18,7 @@ data class OrderRequestDto(
 )
 
 data class AllOrdersDto(
-    val order1: List<Order1>,
-    val order2: List<Order2>,
-    val order3: List<Order3>,
-    val order4: List<Order4>,
+    val order1: List<DiffDto<Order1>>,
+    val order2: List<DiffDto<Order2>>,
+    val order3: List<DiffDto<Order3>>,
 )

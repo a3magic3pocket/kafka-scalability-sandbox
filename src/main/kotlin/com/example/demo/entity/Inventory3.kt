@@ -6,25 +6,19 @@ import org.hibernate.annotations.UpdateTimestamp
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name = "order1")
-data class Order1(
+@Table(name = "inventory3")
+data class Inventory3(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
     var id: Long? = null,
-
-    @Column(name = "user_name", nullable = false)
-    var userName: String,
-
-    @Column(name = "product_name", nullable = false)
-    var productName: String,
 
     @Column(name = "quantity", nullable = false)
     var quantity: Double,
 
     @Column(name = "created_at", nullable = true, insertable = true, updatable = false)
     @CreationTimestamp
-    val createdAt: ZonedDateTime? = null,
+    var createdAt: ZonedDateTime? = null,
 
     @Column(name = "updated_at", nullable = true, insertable = true, updatable = true)
     @UpdateTimestamp

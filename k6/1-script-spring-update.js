@@ -1,7 +1,7 @@
 import http from 'k6/http'
 import { sleep, check } from 'k6'
 
-const typeName = "spring"
+const typeName = "1-script-spring-update"
 
 export const options = {
     vus: 1000,

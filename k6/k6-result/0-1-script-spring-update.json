@@ -3,34 +3,34 @@
     "type": "rate",
     "contains": "default",
     "values": {
+      "rate": 0,
       "passes": 0,
-      "fails": 3001,
-      "rate": 0
+      "fails": 3001
     }
   },
   "http_reqs": {
+    "type": "counter",
+    "contains": "default",
     "values": {
       "count": 3001,
-      "rate": 81.50902727653086
-    },
-    "type": "counter",
-    "contains": "default"
+      "rate": 59.91005693609695
+    }
   },
   "state": {
     "isStdOutTTY": false,
     "isStdErrTTY": false,
-    "testRunDurationMs": 36818.007775
+    "testRunDurationMs": 50091.756768
   },
   "http_req_duration": {
     "type": "trend",
     "contains": "time",
     "values": {
-      "max": 26422.762514,
-      "p(90)": 18921.204865,
-      "p(95)": 20499.44545,
-      "avg": 9875.044751843376,
-      "min": 82.240964,
-      "med": 10377.823394
+      "avg": 13948.699739000689,
+      "min": 100.927773,
+      "med": 14409.988852,
+      "max": 35188.585623,
+      "p(90)": 26766.039795,
+      "p(95)": 28942.243873
     }
   }
 }

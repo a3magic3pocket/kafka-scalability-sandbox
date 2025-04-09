@@ -22,7 +22,7 @@ data class Order2(
     @Column(name = "quantity", nullable = false)
     var quantity: Double,
 
-    @Column(name = "created_at", nullable = true, insertable = false, updatable = false)
+    @Column(name = "created_at", nullable = true, insertable = true, updatable = false)
     @CreationTimestamp
     var createdAt: ZonedDateTime? = null,
 

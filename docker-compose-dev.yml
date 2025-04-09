@@ -1,25 +1,6 @@
 version: '3.8'
 
 services:
-  web:
-    image: amazoncorretto:21-alpine3.20
-    container_name: web
-    restart: always
-    ports:
-      - "8080:8080"
-    user: "root"
-    volumes:
-      - ./build/libs/demo-0.0.1-SNAPSHOT.jar:/demo.jar
-    command:
-      - "java"
-      - "-Dspring.profiles.active=k6"
-      - "-jar"
-      - "/demo.jar"
-    depends_on:
-      - db
-    networks:
-      - docker_net
-
   db:
     image: mariadb:lts-noble
     container_name: db
@@ -46,7 +27,7 @@ services:
 
       # Listeners
       - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://:9093
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT

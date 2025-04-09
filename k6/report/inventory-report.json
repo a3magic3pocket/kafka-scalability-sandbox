@@ -1,0 +1,74 @@
+{
+  "inventory1": {
+    "data": {
+      "firstInventory": {
+        "id": 1,
+        "quantity": 1.0,
+        "createdAt": "2025-04-09T07:08:16.159558Z",
+        "updatedAt": "2025-04-09T07:08:16.15961Z"
+      },
+      "lastInventory": {
+        "id": 3000,
+        "quantity": 1.0,
+        "createdAt": "2025-04-09T07:08:46.256004Z",
+        "updatedAt": "2025-04-09T07:08:46.256031Z"
+      },
+      "count": 3000
+    },
+    "diffSec": 30
+  },
+  "inventory2": {
+    "data": {
+      "firstInventory": {
+        "id": 1,
+        "quantity": 2.0,
+        "createdAt": "2025-04-09T07:09:13.761327Z",
+        "updatedAt": "2025-04-09T07:09:13.771794Z"
+      },
+      "lastInventory": {
+        "id": 3000,
+        "quantity": 2.0,
+        "createdAt": "2025-04-09T07:09:48.207374Z",
+        "updatedAt": "2025-04-09T07:09:48.207393Z"
+      },
+      "count": 3000
+    },
+    "diffSec": 34
+  },
+  "inventory3": {
+    "data": {
+      "firstInventory": {
+        "id": 1,
+        "quantity": 3.0,
+        "createdAt": "2025-04-09T07:10:08.592033Z",
+        "updatedAt": "2025-04-09T07:10:08.592275Z"
+      },
+      "lastInventory": {
+        "id": 3000,
+        "quantity": 3.0,
+        "createdAt": "2025-04-09T07:10:35.81797Z",
+        "updatedAt": "2025-04-09T07:10:35.817987Z"
+      },
+      "count": 3000
+    },
+    "diffSec": 27
+  },
+  "inventory4": {
+    "data": {
+      "firstInventory": {
+        "id": 1,
+        "quantity": 4.0,
+        "createdAt": "2025-04-09T07:11:04.091759Z",
+        "updatedAt": "2025-04-09T07:11:04.091788Z"
+      },
+      "lastInventory": {
+        "id": 3000,
+        "quantity": 4.0,
+        "createdAt": "2025-04-09T07:11:22.663177Z",
+        "updatedAt": "2025-04-09T07:11:22.663195Z"
+      },
+      "count": 3000
+    },
+    "diffSec": 18
+  }
+}

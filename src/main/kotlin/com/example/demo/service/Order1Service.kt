@@ -1,10 +1,10 @@
 package com.example.demo.service
 
+import com.example.demo.config.AppConfig
 import com.example.demo.dto.OrderRequestDto
 import com.example.demo.dto.UpdateDto
 import com.example.demo.entity.Order1
 import com.example.demo.repository.Order1Repository
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -24,13 +24,17 @@ class Order1Service(
         return order1Repository.save(order)
     }
 
-    @Transactional(rollbackFor = [Exception::class], timeout = 5)
+    @Transactional(rollbackFor = [Exception::class], timeout = AppConfig.TRANSACTION_TIMEOUT)
     fun updateOrder(orderUpdateDto: UpdateDto<OrderRequestDto>): Order1 {
         val savedOrder = order1Repository.findByIdWithLock(orderUpdateDto.id)
             ?: throw RuntimeException("order not found")
 
         savedOrder.apply {
             quantity += orderUpdateDto.data.quantity
+        }
+
+        if (AppConfig.USE_DELAY) {
+            Thread.sleep(AppConfig.DELAY)
         }
 
         return order1Repository.save(savedOrder)

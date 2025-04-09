@@ -1,0 +1,36 @@
+{
+  "http_req_failed": {
+    "values": {
+      "passes": 0,
+      "fails": 3000,
+      "rate": 0
+    },
+    "type": "rate",
+    "contains": "default"
+  },
+  "http_reqs": {
+    "type": "counter",
+    "contains": "default",
+    "values": {
+      "count": 3000,
+      "rate": 223.58487245000848
+    }
+  },
+  "state": {
+    "isStdOutTTY": false,
+    "isStdErrTTY": false,
+    "testRunDurationMs": 13417.723512
+  },
+  "http_req_duration": {
+    "type": "trend",
+    "contains": "time",
+    "values": {
+      "min": 9.263759,
+      "med": 2941.86726,
+      "max": 8244.03619,
+      "p(90)": 4523.3592744,
+      "p(95)": 5024.365173549999,
+      "avg": 2936.299693449669
+    }
+  }
+}
