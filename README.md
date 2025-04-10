@@ -108,6 +108,12 @@ kafka-scalability-sandbox
   
     cat ./k6/7-script-kafka-partition-3-batch-insert.js | docker run --volume "./k6/k6-result:/k6-result" --network  kafka-scalability-sandbox_docker_net --name k6 --rm -i grafana/k6 run -
     ```
+  
+## 시나리오 1,2,3에서 딜레이적용
+- 설정 변경
+  - ./src/main/kotlin/com/example/demo/config/AppConfig.kt 열기
+  - USE_DELAY 를 true 로 변경
+  - 스프링 빌드 후 도커 재실행
 
 ## 결과 확인
 - ```bash
@@ -117,4 +123,6 @@ kafka-scalability-sandbox
     # 시나리오 4,5,6,7 결과 조회
     curl "http://localhost:8080/inventories"
     ```
+- k6 결과 위치
+  - ./k6/k6-result
     
